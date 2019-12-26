@@ -11,7 +11,7 @@ public class Con {
 	
 	public Con(String username, String password) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/trabajoABD", username, password);
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ABD", username, password);
 	}
 	
 	public void disconnect() throws SQLException {

@@ -29,14 +29,13 @@ public class MainSection {
 			Querys querys = new Querys(con);
 			
 			while(con.connection != null) {
-				System.out.println("Que deseas hacer:\n1.Ver todos los libros\n2.Buscar un libro\n3.Reservar un libro\n4.Listar Librerias\n5.Desconectar");
+				System.out.println("Que deseas hacer:\n1.Ver todos los libros\n2.Buscar un libro\n3.Reservar un libro\n4.Comprar un libro\n5.Prestar libro\n6.Listar Librerias\n7.Registrar usuario\n8.Listar libros de una libreria\n9.Desconectar");
 				selection = sc.nextInt();
 				switch(selection) {
 					case 1:
 							books = querys.getAllBooks();
 							for(Book book: books) {
-								System.out.print("Id: "+ book.getId() + " Nombre: "+ book.getNombre() + " Libreria: " 
-									+ book.getId_libreria()); //hay más atributos poner según
+								System.out.print("Id: "+ book.getId() + " Nombre: "+ book.getNombre()); //hay más atributos poner según
 								System.out.println("\n");
 							}
 							break;
@@ -45,8 +44,7 @@ public class MainSection {
 						String name = sc.next();
 						books = querys.getBookByName(name);
 						for(Book book: books) {
-							System.out.print("Id: "+ book.getId() + " Nombre: "+ book.getNombre() + " Libreria: " 
-								+ book.getId_libreria()); //hay más atributos poner según
+							System.out.print("Id: "+ book.getId() + " Nombre: "+ book.getNombre()); //hay más atributos poner según
 							System.out.println("\n");
 						}
 						break;
@@ -56,12 +54,51 @@ public class MainSection {
 						System.out.println("Introduce el id de la libreria");
 						libreriaId = sc.nextInt();
 						if(bookId > 0 && libreriaId > 0) {
-							
+							querys.reservarLibro(bookId, libreriaId);
+						} else {
+							System.out.println("Valores no permitidos");
+						}
+						break;
+					case 4:
+						System.out.println("Introduce el id del libro");
+						bookId = sc.nextInt();
+						System.out.println("Introduce el id de la libreria");
+						libreriaId = sc.nextInt();
+						if(bookId > 0 && libreriaId > 0) {
+							querys.venderLibro(bookId, libreriaId);
 						} else {
 							System.out.println("Valores no permitidos");
 						}
 						break;
 					case 5:
+						System.out.println("Introduce el id del libro");
+						bookId = sc.nextInt();
+						System.out.println("Introduce el id de la libreria");
+						libreriaId = sc.nextInt();
+						if(bookId > 0 && libreriaId > 0) {
+							querys.prestarLibro(bookId, libreriaId);
+						} else {
+							System.out.println("Valores no permitidos");
+						}
+						break;
+					
+					case 6:
+						
+						break;
+					case 7:
+						querys.registrarUsuario();
+						break;
+					case 8:
+						System.out.println("Introduce el id de la libreria:");
+						int id_libreria = sc.nextInt();
+						books = querys.librosdeLibreria(id_libreria);
+						System.out.println("\nLibros: \n");
+						for(Book book: books) {
+							System.out.print("Id: "+ book.getId() + " Nombre: "+ book.getNombre()); //hay más atributos poner según
+							System.out.println("\n");
+						}
+						break;
+					case 9:
 						con.disconnect();
 						con.connection = null;
 						System.out.println("Gracias por usar el sistema");

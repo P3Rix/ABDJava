@@ -7,22 +7,19 @@ public class Book {
 	private int id;
 	private String nombre;
 	private String editorial;
+	private String genero;
 	private int edicion;
-	private int id_libreria;
 	private Timestamp fecha_salida;
-	private int stock;
 	private String autor;
 	
-	public Book(int id, String nombre, String editorial, int edicion, int id_libreria, Timestamp fecha_salida,
-			int stock, String autor) {
+	public Book(int id, String nombre, String editorial, int edicion, String genero, Timestamp fecha_salida, String autor) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.editorial = editorial;
 		this.edicion = edicion;
-		this.id_libreria = id_libreria;
+		this.genero = genero;
 		this.fecha_salida = fecha_salida;
-		this.stock = stock;
 		this.autor = autor;
 	}
 
@@ -58,28 +55,12 @@ public class Book {
 		this.edicion = edicion;
 	}
 
-	public int getId_libreria() {
-		return id_libreria;
-	}
-
-	public void setId_libreria(int id_libreria) {
-		this.id_libreria = id_libreria;
-	}
-
 	public Timestamp getFecha_salida() {
 		return fecha_salida;
 	}
 
 	public void setFecha_salida(Timestamp fecha_salida) {
 		this.fecha_salida = fecha_salida;
-	}
-
-	public int getStock() {
-		return stock;
-	}
-
-	public void setStock(int stock) {
-		this.stock = stock;
 	}
 
 	public String getAutor() {
@@ -93,8 +74,16 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", nombre=" + nombre + ", editorial=" + editorial + ", edicion=" + edicion
-				+ ", id_libreria=" + id_libreria + ", fecha_salida=" + fecha_salida + ", stock=" + stock + ", autor="
+				+ ", fecha_salida=" + fecha_salida + ", autor="
 				+ autor + "]";
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 	
 	
