@@ -14,7 +14,7 @@ public class Querys {
 	public Con conn;
 	public Statement statement;
 	public ResultSet rs;
-	public Object[] valuesBook = new Object[8];
+	public Object[] valuesBook = new Object[7];
 	public Scanner sc;
 	public String queryAllBooks = "select * from Libro";
 	
@@ -290,6 +290,48 @@ public class Querys {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public void listarLibrerias() {
+		try {
+			statement = conn.connection.createStatement();
+			rs = statement.executeQuery("Select * from Libreria");
+			System.out.println("\n");
+			while(rs.next()) {
+				for(int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+					System.out.println(rs.getMetaData().getColumnName(i) + ": " + rs.getObject(i));
+				}
+				System.out.println("");
+				
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("\n\n");
+	}
+	
+	public void cancelarReservasUsuario(String dni) {
+		if(dni.length() == 9) {
+			try {
+				statement = conn.connection.createStatement();
+				rs = statement.executeQuery("select ID from Usuario where dni like '" + dni + "'");
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					rs = statement.executeQuery("select ID_libro, ID_libreria from Reserva where ID_user = "+ id);
+					while(rs.next()) {
+						statement.executeUpdate("update Libreria_libro SET stock = stock + 1 where ID_libro = " + rs.getInt(1) + " and ID_libreria = " + rs.getInt(2));
+					}
+					statement.executeUpdate("delete from Reserva where ID_user = " + id); 
+					System.out.println("Reservas canceladas correctamente");
+				} else {
+					System.out.println("No se ha encontrado el usuario");
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("El dni no es correcto");
 		}
 	}
 	

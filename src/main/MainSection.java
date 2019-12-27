@@ -29,7 +29,7 @@ public class MainSection {
 			Querys querys = new Querys(con);
 			
 			while(con.connection != null) {
-				System.out.println("Que deseas hacer:\n1.Ver todos los libros\n2.Buscar un libro\n3.Reservar un libro\n4.Comprar un libro\n5.Prestar libro\n6.Listar Librerias\n7.Registrar usuario\n8.Listar libros de una libreria\n9.Desconectar");
+				System.out.println("Que deseas hacer:\n1.Ver todos los libros\n2.Buscar un libro\n3.Reservar un libro\n4.Comprar un libro\n5.Prestar libro\n6.Listar Librerias\n7.Registrar usuario\n8.Listar libros de una libreria\n9.Cancelar reservas de un usuario\n10.Desconectar");
 				selection = sc.nextInt();
 				switch(selection) {
 					case 1:
@@ -83,7 +83,7 @@ public class MainSection {
 						break;
 					
 					case 6:
-						
+						querys.listarLibrerias();
 						break;
 					case 7:
 						querys.registrarUsuario();
@@ -99,6 +99,11 @@ public class MainSection {
 						}
 						break;
 					case 9:
+						System.out.println("Introduce el dni: ");
+						String dni = sc.next();
+						querys.cancelarReservasUsuario(dni);
+						break;
+					case 10:
 						con.disconnect();
 						con.connection = null;
 						System.out.println("Gracias por usar el sistema");
