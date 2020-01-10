@@ -171,7 +171,7 @@ public class Querys {
 								int max = rs.getInt(1) + 1;
 								Timestamp now = new Timestamp(System.currentTimeMillis());
 								//System.out.println("insert into Venta values(\'" + max + "', \'" + idLibro + "\', \'" + id_user + "\', \'" + now + "\', \'" + idLibreria + "\', \'" + valor + "\');");
-								statement.executeUpdate("insert into Reserva values('" + max + "', '" + idLibro + "', '" + id_user + "', '" + now + "', '" + idLibreria + "', '" + valor + "');");
+								statement.executeUpdate("insert into Venta values('" + max + "', '" + idLibro + "', '" + id_user + "', '" + now + "', '" + idLibreria + "', '" + valor + "');");
 								statement.executeUpdate("update Libreria_Libro SET stock = " + newStock + " where ID_Libro = " + idLibro + " and " + idLibreria);
 								System.out.println("La venta se ha realizado correctamente");
 								break;
